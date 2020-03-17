@@ -1,0 +1,50 @@
+﻿<Window x:Class="FlickrView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlickrView"
+        mc:Ignorable="d"
+        Title="FlickrView" Height="450" Width="800">
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Row="0">
+                <Grid  Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="5" Grid.Column="0">Enter Search Tags:</Label>
+                    <TextBox  VerticalAlignment="Center" Margin="2" Grid.Column="1" Text="{Binding Path=SearchTags, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="AliceBlue"></TextBox>
+                    <ComboBox VerticalAlignment="Center" Margin="5" Grid.Column="2" ItemsSource="{Binding Path=SourcesEntries}" SelectedValue="{Binding Path=SourcesEntry, UpdateSourceTrigger=PropertyChanged}" Text="Select Option" Background="AliceBlue"></ComboBox>
+                    <Button FontWeight="Bold" VerticalAlignment="Center" Grid.Column="3" Name="btnSearch" Click="btnSearch_Click">Search</Button>
+                </Grid>
+            </Border>
+            <Rectangle Grid.Row="1" Fill="DarkGray" />
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
+                <UniformGrid>
+                    <ListView ItemsSource="{Binding Images}" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" HorizontalAlignment="Stretch"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Image Source="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Stretch="UniformToFill" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </UniformGrid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
