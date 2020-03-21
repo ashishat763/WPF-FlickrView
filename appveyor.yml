@@ -11,12 +11,11 @@ before_build:
 
 deploy:
   description: 'FlickrView - WPF Application'
+  tag: $(APPVEYOR_REPO_TAG_NAME)
   provider: GitHub
   auth_token:
-    secure: 0d01cde00e986252e64e1e591824d1cf7ea77717 # your encrypted token from GitHub
+    secure: GCYjUnTt08CJQqjbdzBQqoh+FY3N6/zyoYR5cY7FjERdRYrxRT3dmTefgoQ3mMd6 # your encrypted token from GitHub
   artifact: FlickrView            # upload all NuGet packages to release assets
-  draft: false
-  prerelease: false
   on:               # release from master branch only
     APPVEYOR_REPO_TAG: true        # deploy on tag push only
 
