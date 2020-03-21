@@ -12,5 +12,17 @@ artifacts:
     
 before_build:
   - nuget restore
-  
+
+deploy:
+  description: 'FlickrView - WPF Application'
+  provider: GitHub
+  auth_token:
+    secure: 0d01cde00e986252e64e1e591824d1cf7ea77717 # your encrypted token from GitHub
+  artifact: FlickrView            # upload all NuGet packages to release assets
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    APPVEYOR_REPO_TAG: true        # deploy on tag push only
+
  
