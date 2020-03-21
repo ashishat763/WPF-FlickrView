@@ -3,7 +3,7 @@ version: 1.0.{build}
 artifacts:
 
   # pushing a single file with environment variable in path and "Deployment name" specified
-  - path: FlickrView\bin\debug\FlickrView.exe
+  - path: FlickrView\Binaries\FlickrView.exe
     name: FlickrView
     
 before_build:
@@ -20,6 +20,6 @@ deploy:
   prerelease: false
   force_update: true
   on:               # release from master branch only
-    APPVEYOR_REPO_TAG: true        # deploy on tag push only
+    appveyor_repo_tag: true        # deploy on tag push only
 
  
