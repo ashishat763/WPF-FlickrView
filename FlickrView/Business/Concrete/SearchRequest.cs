@@ -99,7 +99,7 @@ namespace FlickrView.Business.Concrete
                             {
                                 XmlAttributeCollection xmlAttributeCollection = child.Attributes;
                                 XmlNode node = xmlAttributeCollection.GetNamedItem("type");
-                                if (node.Value == "image/jpeg")
+                                if (node.Value == @"image/jpeg")
                                 {
                                     XmlNode url = xmlAttributeCollection.GetNamedItem("href");
                                     imageUrls.Add(url.Value);
