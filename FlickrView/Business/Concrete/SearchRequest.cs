@@ -23,6 +23,7 @@ namespace FlickrView.Business.Concrete
         {
 
         }
+        //Injection Constructor
         public SearchRequest(IConnection connection, IConfiguration configuration)
         {
             conn = connection;
@@ -36,10 +37,11 @@ namespace FlickrView.Business.Concrete
                 List<byte[]> images = null;
                 switch (source)
                 {
+                    //As of now, only Flickr Api calls is implemented. We can add custom implementation here.
                     case "Flickr":
                         var imageUrls = SearchFlickr(searchString, source);
                         images = new List<byte[]>();
-                        Parallel.ForEach(imageUrls, (currentImg) =>
+                        Parallel.ForEach(imageUrls, (currentImg) => // Download each image from its image url
                         {
                             var img = conn.DownloadImage(currentImg);
                             if (img != null)
@@ -62,11 +64,11 @@ namespace FlickrView.Business.Concrete
         {
             try
             {
-                var http = conn.GetNewHttpClient();
-                string uri = config.GetAppSettings(source);
-                string annotatedUri = AnnotateUrl(searchString, uri);
-                string result = conn.GetResponseString(http, annotatedUri);
-                List<string> imageUrls = ParseResult(result);
+                var http = conn.GetNewHttpClient(); //Create New Http client
+                string uri = config.GetAppSettings(source); // Set public api based on source
+                string annotatedUri = AnnotateUrl(searchString, uri); //Annotate the uri with search tags
+                string result = conn.GetResponseString(http, annotatedUri); // call the uri using http client
+                List<string> imageUrls = ParseResult(result); // parse result to get a list of image urls
                 return imageUrls;
             }
             catch(Exception ex)

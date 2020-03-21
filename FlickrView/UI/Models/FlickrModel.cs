@@ -18,12 +18,14 @@ namespace FlickrView.UI.Models
         }
         public List<string> GetSources()
         {
+            //return all sources(like flickr, instagram) that are available
             return config.GetAllSources();
         }
         public List<byte[]> SearchImages(string tags, string source)
         {
             try
             {
+                //Search
                 SearchRequest searchRequest = new SearchRequest();
                 var result = searchRequest.GetSearchResults(tags, source);
                 return result;

@@ -70,10 +70,13 @@ namespace FlickrView.UI.ViewModels
             {
                 Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                 {
+                    //Initiate Search if search tags and source is not empty
                     var resultArray = _flickrModel.SearchImages(SearchTags, SourcesEntry);
                     if(resultArray != null)
                     {
                         var displayList = new List<ImageSource>();
+                        // the resultArray is an byte array. To display in the view, we need to convert each item in the array
+                        // into a BitmapImage
                         Parallel.ForEach(resultArray, (currentArray) => { displayList.Add(ToImage(currentArray)); });
                         Images = new ObservableCollection<ImageSource>(displayList);
                     }                  
@@ -92,9 +95,9 @@ namespace FlickrView.UI.ViewModels
             {
                 var image = new BitmapImage();
                 image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad; // here
+                image.CacheOption = BitmapCacheOption.OnLoad; 
                 image.StreamSource = ms;
-                image.DecodePixelHeight = 150;
+                image.DecodePixelHeight = 150;   //Adjust Width and Height as originally the images are quite large.
                 image.DecodePixelWidth = 200;
                 image.EndInit();
                 image.Freeze();

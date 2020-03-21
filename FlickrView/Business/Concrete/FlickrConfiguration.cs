@@ -14,6 +14,8 @@ namespace FlickrView.Business.Concrete
         private static readonly string source = "Flickr";
         public string GetAppSettings(string key)
         {
+            //As of now, this is hardcoded. Eventually, we can provide a Config form where user can
+            // add other public api and we can store/get the data from Db
             return url;
         }
         public List<string> GetAllSources()
