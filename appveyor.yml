@@ -14,7 +14,7 @@ deploy:
   tag: $(APPVEYOR_REPO_TAG_NAME)
   provider: GitHub
   auth_token:
-    secure: GCYjUnTt08CJQqjbdzBQqoh+FY3N6/zyoYR5cY7FjERdRYrxRT3dmTefgoQ3mMd6 # your encrypted token from GitHub
+    secure: AU3P8vWlYNyvqVjV9ax39zsOV5kSSFFU+5+jTyBMEeN8PRfb4UleNVDzwcoXhUjR # your encrypted token from GitHub
   artifact: FlickrView            # upload all NuGet packages to release assets
   on:               # release from master branch only
     APPVEYOR_REPO_TAG: true        # deploy on tag push only
