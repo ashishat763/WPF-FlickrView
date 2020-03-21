@@ -3,23 +3,18 @@ version: 1.0.{build}
 artifacts:
 
   # pushing a single file with environment variable in path and "Deployment name" specified
-  - path: FlickrView\Binaries\FlickrView.exe
+  - path: Binaries\FlickrView.exe
     name: FlickrView
     
 before_build:
   - nuget restore
 
 deploy:
-  description: 'FlickrView - WPF Application'
-  tag: $(APPVEYOR_REPO_TAG_NAME)
   provider: GitHub
-  auth_token:
-    secure: AU3P8vWlYNyvqVjV9ax39zsOV5kSSFFU+5+jTyBMEeN8PRfb4UleNVDzwcoXhUjR # your encrypted token from GitHub
-  artifact: FlickrView            # upload all NuGet packages to release assets
-  draft: false
-  prerelease: false
-  force_update: true
-  on:               # release from master branch only
-    appveyor_repo_tag: true        # deploy on tag push only
-
+    artifact: FlickrView           # upload all NuGet packages to release assets
+    draft: false
+    prerelease: false
+    on:
+      branch: master                # release from master branch only
+      APPVEYOR_REPO_TAG: true       # deploy on tag push only
  
