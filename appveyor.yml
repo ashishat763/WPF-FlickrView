@@ -1,9 +1,5 @@
 version: 1.0.{build}
 
-branches:
-  # whitelist
-  only:
-    - master
 artifacts:
 
   # pushing a single file with environment variable in path and "Deployment name" specified
@@ -21,8 +17,7 @@ deploy:
   artifact: FlickrView            # upload all NuGet packages to release assets
   draft: false
   prerelease: false
-  on:
-    branch: master                 # release from master branch only
+  on:               # release from master branch only
     APPVEYOR_REPO_TAG: true        # deploy on tag push only
 
  
