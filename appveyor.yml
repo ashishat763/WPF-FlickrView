@@ -10,11 +10,12 @@ before_build:
   - nuget restore
 
 deploy:
+  description: 'FlickrView - WPF Application'
   provider: GitHub
-    artifact: FlickrView           # upload all NuGet packages to release assets
-    draft: false
-    prerelease: false
-    on:
-      branch: master                # release from master branch only
-      APPVEYOR_REPO_TAG: true       # deploy on tag push only
+  artifact: FlickrView           
+  draft: false
+  prerelease: false
+  on:
+    branch: master                
+    APPVEYOR_REPO_TAG: true       
  
