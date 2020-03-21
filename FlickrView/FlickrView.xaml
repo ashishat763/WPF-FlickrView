@@ -38,7 +38,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <Image Source="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Stretch="UniformToFill" />
+                                    <Image Source="{Binding}" HorizontalAlignment="Center"  VerticalAlignment="Top" Stretch="Fill" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

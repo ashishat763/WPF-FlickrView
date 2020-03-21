@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -15,13 +17,13 @@ namespace FlickrView.Business.Concrete
 {
     public class SearchRequest
     {
-        IFlickrConnection conn;
-        IFlickrConfiguration config;
+        IConnection conn;
+        IConfiguration config;
         public SearchRequest() : this(new FlickrConnection(), new FlickrConfiguration())
         {
 
         }
-        public SearchRequest(IFlickrConnection connection, IFlickrConfiguration configuration)
+        public SearchRequest(IConnection connection, IConfiguration configuration)
         {
             conn = connection;
             config = configuration;
@@ -29,20 +31,34 @@ namespace FlickrView.Business.Concrete
 
         public List<byte[]> GetSearchResults(string searchString, string source)
         {
-            var imageUrls = Search(searchString, source);
-            List<byte[]> images = new List<byte[]>();
-            Parallel.ForEach(imageUrls, (currentImg) =>
+            try
             {
-                var img = conn.DownloadImage(currentImg);
-                if (img != null)
+                List<byte[]> images = null;
+                switch (source)
                 {
-                    images.Add(img);
+                    case "Flickr":
+                        var imageUrls = SearchFlickr(searchString, source);
+                        images = new List<byte[]>();
+                        Parallel.ForEach(imageUrls, (currentImg) =>
+                        {
+                            var img = conn.DownloadImage(currentImg);
+                            if (img != null)
+                            {
+                                images.Add(img);
+                            }
+                        });
+                        break;
+
                 }
-            });
-            return images;
+                return images;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
-        public List<string> Search(string searchString, string source)
+        private List<string> SearchFlickr(string searchString, string source)
         {
             try
             {
@@ -58,7 +74,7 @@ namespace FlickrView.Business.Concrete
                 return new List<string>();
             }
         }
-        public string AnnotateUrl(string searchString, string uri)
+        private string AnnotateUrl(string searchString, string uri)
         {
             string tags = String.Join(",", searchString.Split(' '));
             return uri + "?tags=" + tags;
@@ -66,35 +82,43 @@ namespace FlickrView.Business.Concrete
         }
         public List<string> ParseResult(string result)
         {
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(result);
-            XmlNodeList elemlist = xmlDocument.GetElementsByTagName("entry");
-            List<string> imageUrls = new List<string>();
-            Parallel.ForEach(elemlist.OfType<XmlElement>(), (element) =>
+            try
             {
-                try
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(result);
+                XmlNodeList elemlist = xmlDocument.GetElementsByTagName("entry");
+                List<string> imageUrls = new List<string>();
+                Parallel.ForEach(elemlist.OfType<XmlElement>(), (element) =>
                 {
-                    var childs = element.ChildNodes;
-                    foreach (XmlElement child in childs)
+                    try
                     {
-                        if (child.Name == "link" && child.HasAttributes)
+                        var childs = element.ChildNodes;
+                        foreach (XmlElement child in childs)
                         {
-                            XmlAttributeCollection xmlAttributeCollection = child.Attributes;
-                            XmlNode node = xmlAttributeCollection.GetNamedItem("type");
-                            if (node.Value == "image/jpeg")
+                            if (child.Name == "link" && child.HasAttributes)
                             {
-                                XmlNode url = xmlAttributeCollection.GetNamedItem("href");
-                                imageUrls.Add(url.Value);
+                                XmlAttributeCollection xmlAttributeCollection = child.Attributes;
+                                XmlNode node = xmlAttributeCollection.GetNamedItem("type");
+                                if (node.Value == "image/jpeg")
+                                {
+                                    XmlNode url = xmlAttributeCollection.GetNamedItem("href");
+                                    imageUrls.Add(url.Value);
+                                }
                             }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
+                    catch (Exception ex)
+                    {
 
-                }
-            });
-            return imageUrls;
+                    }
+                });
+                return imageUrls;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+            
         }
 
 

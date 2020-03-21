@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlickrView.Business.Interfaces
 {
-    public interface IFlickrConfiguration
+    public interface IConfiguration
     {
         string GetAppSettings(string key);
         List<string> GetAllSources();

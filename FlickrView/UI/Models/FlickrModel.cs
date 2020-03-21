@@ -11,7 +11,7 @@ namespace FlickrView.UI.Models
 {
     public class FlickrModel
     {
-        IFlickrConfiguration config;
+        IConfiguration config;
         public FlickrModel()
         {
             config = new FlickrConfiguration();
@@ -22,14 +22,16 @@ namespace FlickrView.UI.Models
         }
         public List<byte[]> SearchImages(string tags, string source)
         {
-            SearchRequest searchRequest = new SearchRequest();
-            var result = searchRequest.GetSearchResults(tags, source);
-            return result;
+            try
+            {
+                SearchRequest searchRequest = new SearchRequest();
+                var result = searchRequest.GetSearchResults(tags, source);
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }           
         }
-
-    }
-    public class FlickrImages
-    {
-        public Image Image { get; set; }
     }
 }

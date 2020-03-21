@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace FlickrView.Business.Concrete
 {
-    public class FlickrConnection : IFlickrConnection
+    public class FlickrConnection : IConnection
     {       
         public HttpClient GetNewHttpClient()
         {

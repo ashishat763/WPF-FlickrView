@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlickrView.Business.Concrete
 {
-    public class FlickrConfiguration : IFlickrConfiguration
+    public class FlickrConfiguration : IConfiguration
     {
         public string GetAppSettings(string key)
         {

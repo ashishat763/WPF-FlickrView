@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace FlickrView.Business.Interfaces
 {
-    public interface IFlickrConnection
+    public interface IConnection
     {
         HttpClient GetNewHttpClient();
         string GetResponseString(HttpClient client, string requestUri);

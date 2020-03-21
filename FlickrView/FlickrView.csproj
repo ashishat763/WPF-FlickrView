@@ -58,6 +58,7 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </ApplicationDefinition>
     <Compile Include="UI\Models\FlickrModel.cs" />
     <Compile Include="UI\ViewModels\FlickrViewModel.cs" />
@@ -68,12 +69,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Business\Concrete\FlickrConfiguration.cs" />
     <Compile Include="Business\Concrete\FlickrConnection.cs" />
     <Compile Include="Business\Concrete\SearchRequest.cs" />
-    <Compile Include="Business\Interfaces\IFlickrConfiguration.cs" />
-    <Compile Include="Business\Interfaces\IFlickrConnection.cs" />
+    <Compile Include="Business\Interfaces\IConfiguration.cs" />
+    <Compile Include="Business\Interfaces\IConnection.cs" />
     <Compile Include="FlickrView.xaml.cs">
       <DependentUpon>FlickrView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -111,4 +113,7 @@
     </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)Binaries\" /F /Y /I</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -71,11 +71,13 @@ namespace FlickrView.UI.ViewModels
                 Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                 {
                     var resultArray = _flickrModel.SearchImages(SearchTags, SourcesEntry);
-                    var displayList = new List<ImageSource>();
-                    Parallel.ForEach(resultArray, (currentArray) => { displayList.Add(ToImage(currentArray)); });                   
-                    Images = new ObservableCollection<ImageSource>(displayList);
-                }));
-                
+                    if(resultArray != null)
+                    {
+                        var displayList = new List<ImageSource>();
+                        Parallel.ForEach(resultArray, (currentArray) => { displayList.Add(ToImage(currentArray)); });
+                        Images = new ObservableCollection<ImageSource>(displayList);
+                    }                  
+                }));               
             }
            
         }
@@ -84,7 +86,7 @@ namespace FlickrView.UI.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-        public BitmapImage ToImage(byte[] array)
+        private BitmapImage ToImage(byte[] array)
         {
             using (var ms = new System.IO.MemoryStream(array))
             {
