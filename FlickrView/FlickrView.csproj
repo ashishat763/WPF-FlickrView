@@ -116,4 +116,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)Binaries\" /F /Y /I</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>call $(SolutionDir)\prebuild.bat</PreBuildEvent>
+  </PropertyGroup>
 </Project>
