@@ -10,17 +10,16 @@ namespace FlickrView.Business.Concrete
 {
     public class FlickrConfiguration : IConfiguration
     {
+        private static readonly string url = @"https://www.flickr.com/services/feeds/photos_public.gne";
+        private static readonly string source = "Flickr";
         public string GetAppSettings(string key)
         {
-            return ConfigurationManager.AppSettings[key]; ;
+            return url;
         }
         public List<string> GetAllSources()
         {
             List<string> sources = new List<string>();
-            foreach(var appSources in ConfigurationManager.AppSettings.Keys)
-            {
-                sources.Add(appSources.ToString());
-            }
+            sources.Add(source);
             return sources;
         }
     }
