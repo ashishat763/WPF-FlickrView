@@ -12,9 +12,12 @@ before_build:
 deploy:
   description: 'FlickrView - WPF Application'
   provider: GitHub
+  auth_token:
+    secure: AU3P8vWlYNyvqVjV9ax39zsOV5kSSFFU+5+jTyBMEeN8PRfb4UleNVDzwcoXhUjR
   artifact: FlickrView           
   draft: false
   prerelease: false
+    tag: $(APPVEYOR_REPO_TAG_NAME)
   on:
     branch: master                
     APPVEYOR_REPO_TAG: true       
