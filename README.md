@@ -11,6 +11,6 @@
 1. Launch the app(FlickrView.exe) after build.
 2. Enter your search value(like nature, snow etc.) and Flickr from the dropdown. Click Search button.
 3. You can multiple search value separated by space.
-4. At the moment, you can a max of 20 results at a time.
+4. At the moment, you can view a max of 20 results at a time as Flickr Public API returns only max 20 records.
 
 
