@@ -17,6 +17,7 @@ deploy:
       secure: oCvOViNHeHV4+54zVp768H2N/PdghtrM/CBjOCuj0XOgQsVXgoAxy/SMeliTwLuM
     bucket: flickrview
     folder: flickrview
+    region: ap-south-1
     artifact: FlickrView
     set_public: true
    
