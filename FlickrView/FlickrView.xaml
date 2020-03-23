@@ -32,7 +32,7 @@
                     <ListView ItemsSource="{Binding Images}" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="5" HorizontalAlignment="Stretch"/>
+                                <UniformGrid Columns="4" HorizontalAlignment="Stretch"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ListView.ItemTemplate>

@@ -97,8 +97,8 @@ namespace FlickrView.UI.ViewModels
                 image.BeginInit();
                 image.CacheOption = BitmapCacheOption.OnLoad; 
                 image.StreamSource = ms;
-                image.DecodePixelHeight = 150;   //Adjust Width and Height as originally the images are quite large.
-                image.DecodePixelWidth = 200;
+                image.DecodePixelHeight = 300;   //Adjust Width and Height as originally the images are quite large.
+                image.DecodePixelWidth = 300;
                 image.EndInit();
                 image.Freeze();
                 return image;
