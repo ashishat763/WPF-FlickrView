@@ -32,13 +32,7 @@ namespace FlickrView
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             var dc = (FlickrViewModel)DataContext;
-            Thread thread = new Thread(delegate ()
-            {
-                dc.SearchImages();
-            });
-            thread.IsBackground = true;
-            thread.Start();
-            //c.SearchImages();
+            dc.SearchImages();
         }
     }
 }

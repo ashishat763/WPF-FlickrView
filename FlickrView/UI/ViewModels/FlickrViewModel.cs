@@ -70,7 +70,7 @@ namespace FlickrView.UI.ViewModels
             {
                 Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    //Initiate Search if search tags and source is not empty
+                    //Initiate Search if search tags and source are not empty
                     var resultArray = _flickrModel.SearchImages(SearchTags, SourcesEntry);
                     if(resultArray != null)
                     {
